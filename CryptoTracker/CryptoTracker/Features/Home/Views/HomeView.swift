@@ -15,9 +15,15 @@ struct HomeView: View {
         ZStack {
             Color.theme.background
                 .ignoresSafeArea()
-
             VStack(content: {
                 homeHeader
+                if !showPortfolio {
+                    HomeStatsView()
+                        .transition(.move(edge: .leading))
+                } else {
+                    HomeStatsView()
+                        .transition(.move(edge: .trailing))
+                }
                 SearchBarView(searchText: $homeViewModel.searchText)
                 columnTitles
                 if !showPortfolio {
