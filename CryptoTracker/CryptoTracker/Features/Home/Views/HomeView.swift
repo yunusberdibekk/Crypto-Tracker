@@ -18,6 +18,7 @@ struct HomeView: View {
 
             VStack(content: {
                 homeHeader
+                SearchBarView(searchText: $homeViewModel.searchText)
                 columnTitles
                 if !showPortfolio {
                     allCoinsList
@@ -37,6 +38,7 @@ struct HomeView: View {
     NavigationStack {
         HomeView()
             .toolbar(.hidden, for: .automatic)
+            .preferredColorScheme(.dark)
     }
     .environmentObject(HomeViewModel())
 }
