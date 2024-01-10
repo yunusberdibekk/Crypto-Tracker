@@ -10,7 +10,6 @@ import Foundation
 
 final class CoinDataService {
     @Published var allCoins: [CoinModel] = []
-    // var cancellables = Set<AnyCancellable>()
     var coinSubscription: AnyCancellable?
 
     init() {

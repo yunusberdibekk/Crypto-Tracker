@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA27F2BA2B4E015D005A3082 /* MarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */; };
+		AA27F2BC2B4E04DF005A3082 /* MarketDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27F2BB2B4E04DF005A3082 /* MarketDataService.swift */; };
 		AAA8694E2B4AE8C200B3C71C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8694D2B4AE8C200B3C71C /* SearchBarView.swift */; };
 		AAA869502B4AFCB500B3C71C /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8694F2B4AFCB500B3C71C /* UIApplication+Extension.swift */; };
 		AAC9FEA12B4B39D600FCDA15 /* StatisticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FEA02B4B39D600FCDA15 /* StatisticModel.swift */; };
@@ -33,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataModel.swift; sourceTree = "<group>"; };
+		AA27F2BB2B4E04DF005A3082 /* MarketDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataService.swift; sourceTree = "<group>"; };
+		AA27F2BD2B4E0F11005A3082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AAA8694D2B4AE8C200B3C71C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		AAA8694F2B4AFCB500B3C71C /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		AAC9FEA02B4B39D600FCDA15 /* StatisticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticModel.swift; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 			children = (
 				BE486A9C2B372DA400A0BFF3 /* CoinDataService.swift */,
 				BE486AE92B37A82D00A0BFF3 /* CoinImageService.swift */,
+				AA27F2BB2B4E04DF005A3082 /* MarketDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -140,6 +146,7 @@
 		BEE44FEC2B36E54500F177FF /* CryptoTracker */ = {
 			isa = PBXGroup;
 			children = (
+				AA27F2BD2B4E0F11005A3082 /* Info.plist */,
 				BEE450012B36E6DD00F177FF /* App */,
 				BE486A9A2B372D8E00A0BFF3 /* Core */,
 				BEE44FFD2B36E63B00F177FF /* Utils */,
@@ -218,6 +225,7 @@
 			children = (
 				BEE450102B36EF7600F177FF /* CoinModel.swift */,
 				AAC9FEA02B4B39D600FCDA15 /* StatisticModel.swift */,
+				AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAC9FEA12B4B39D600FCDA15 /* StatisticModel.swift in Sources */,
+				AA27F2BC2B4E04DF005A3082 /* MarketDataService.swift in Sources */,
 				AAC9FEA32B4B3AC300FCDA15 /* StatisticView.swift in Sources */,
 				BE486A9D2B372DA400A0BFF3 /* CoinDataService.swift in Sources */,
 				BEE450132B36F8B800F177FF /* CoinRowView.swift in Sources */,
@@ -343,6 +352,7 @@
 				BEE450082B36E8C900F177FF /* HomeView.swift in Sources */,
 				AAC9FEA62B4B3DEF00FCDA15 /* HomeStatsView.swift in Sources */,
 				BEE44FEE2B36E54500F177FF /* CryptoTrackerApp.swift in Sources */,
+				AA27F2BA2B4E015D005A3082 /* MarketDataModel.swift in Sources */,
 				BE486AA02B37454800A0BFF3 /* NetworkingManager.swift in Sources */,
 				BEE4500D2B36E9EF00F177FF /* CircleButtonView.swift in Sources */,
 				BE486AEC2B37A9D900A0BFF3 /* CoinImageViewModel.swift in Sources */,
@@ -487,6 +497,7 @@
 				DEVELOPMENT_TEAM = 46PR5V47LD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CryptoTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Crypto Tracker";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -519,6 +530,7 @@
 				DEVELOPMENT_TEAM = 46PR5V47LD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CryptoTracker/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Crypto Tracker";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

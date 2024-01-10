@@ -17,13 +17,7 @@ struct HomeView: View {
                 .ignoresSafeArea()
             VStack(content: {
                 homeHeader
-                if !showPortfolio {
-                    HomeStatsView()
-                        .transition(.move(edge: .leading))
-                } else {
-                    HomeStatsView()
-                        .transition(.move(edge: .trailing))
-                }
+                HomeStatsView(showPortfolio: $showPortfolio) // Transition gelecek.
                 SearchBarView(searchText: $homeViewModel.searchText)
                 columnTitles
                 if !showPortfolio {

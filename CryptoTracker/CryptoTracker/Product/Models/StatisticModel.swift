@@ -21,8 +21,8 @@ struct StatisticModel: Identifiable {
 
     static let statistic1: StatisticModel = .init(
         title: "Market Cap",
-        value: "$12.58n",
-        percentageChange: 25.34
+        value: "$12.5Bn",
+        percentageChange: 45
     )
 
     static let statistic2: StatisticModel = .init(
