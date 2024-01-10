@@ -16,7 +16,7 @@ import Foundation
 
 // MARK: - CoinModel
 
-struct CoinModel: Identifiable, Codable {
+struct CoinModel: Identifiable, Codable, Equatable {
     let id, symbol, name: String
     let image: String
     let currentPrice: Double
@@ -274,6 +274,10 @@ struct CoinModel: Identifiable, Codable {
         ]),
         priceChangePercentage24HInCurrency: -0.300096635222597,
         currentHoldings: 1.5)
+
+    static func == (lhs: CoinModel, rhs: CoinModel) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 // MARK: - SparklineIn7D
