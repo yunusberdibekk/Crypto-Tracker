@@ -33,6 +33,11 @@ struct PorfolioView: View {
                     trailinNavBarButtons
                 }
             }
+            .onChange(of: viewModel.searchText) { _, newValue in
+                if newValue == "" {
+                    removeSelectedCoin()
+                }
+            }
         }
     }
 }
@@ -46,13 +51,14 @@ extension PorfolioView {
     private var coinLogoList: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 10, content: {
-                ForEach(viewModel.allCoins) { coin in
+                ForEach(viewModel.searchText.isEmpty ?
+                    viewModel.allCoins : viewModel.portfolioCoins){ coin in
                     CoinLogoView(coin: coin)
                         .frame(width: 75)
                         .padding(4)
                         .onTapGesture {
                             withAnimation(.easeIn) {
-                                selectedCoin = coin
+                                updateSelectedCoin(coin: coin)
                             }
                         }
                         .background(
@@ -121,9 +127,10 @@ extension PorfolioView {
     }
 
     private func saveButtonPressed() {
-        guard let coin = selectedCoin else { return }
-        // Save to portfolio
-        // Show checkmark
+        guard let coin = selectedCoin,
+              let amount = Double(quantityText)
+        else { return }
+        viewModel.updatePortfolio(coin: coin, amount: amount)
         withAnimation(.easeIn) {
             showCheckmark = true
             removeSelectedCoin()
@@ -135,6 +142,18 @@ extension PorfolioView {
             withAnimation(.easeInOut) {
                 showCheckmark = false
             }
+        }
+    }
+
+    private func updateSelectedCoin(coin: CoinModel) {
+        selectedCoin = coin
+
+        if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
+           let amount = portfolioCoin.currentHoldings
+        {
+            quantityText = amount.description
+        } else {
+            quantityText = ""
         }
     }
 

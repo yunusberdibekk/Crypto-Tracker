@@ -10,14 +10,13 @@ import Foundation
 
 final class HomeViewModel: ObservableObject {
     @Published var statistics: [StatisticModel] = []
-
     @Published var allCoins: [CoinModel] = []
     @Published var portfolioCoins: [CoinModel] = []
-
     @Published var searchText: String = ""
 
     private let coinDataService = CoinDataService() // TODO: -Bunu dışarıdan alabiliriz.
     private let marketDataService = MarketDataService() // TODO: -Bunu dışarıdan alabiliriz.
+    private let portfolioDataService = PortfolioDataService() // TODO: -Singleton kullanılabilir.
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -25,7 +24,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     func addSubscribers() {
-        /// Update allCoins
+        /// Updates allCoins
         $searchText
             .combineLatest(coinDataService.$allCoins)
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
@@ -35,13 +34,33 @@ final class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        /// Update market data
+        /// Updates marketData
         marketDataService.$marketData
             .map(mapGlobalMarketData)
             .sink { [weak self] returnedStats in
                 self?.statistics = returnedStats
             }
             .store(in: &cancellables)
+
+        /// Update portfolioCoins
+        $allCoins
+            .combineLatest(portfolioDataService.$savedEntities)
+            .map { coinModels, portfolioEntities -> [CoinModel] in
+                coinModels.compactMap { coin -> CoinModel? in
+                    guard let entity = portfolioEntities.first(where: { $0.coinID == coin.id }) else {
+                        return nil
+                    }
+                    return coin.updateHoldings(amount: entity.amount)
+                }
+            }
+            .sink { [weak self] returnedCoins in
+                self?.portfolioCoins = returnedCoins
+            }
+            .store(in: &cancellables)
+    }
+
+    func updatePortfolio(coin: CoinModel, amount: Double) {
+        portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
 
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel] {
