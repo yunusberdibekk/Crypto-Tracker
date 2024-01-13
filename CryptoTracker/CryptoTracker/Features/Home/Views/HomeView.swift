@@ -22,7 +22,7 @@ struct HomeView: View {
                 })
             VStack(content: {
                 homeHeader
-                HomeStatsView(showPortfolio: $showPortfolio) // Transition gelecek.
+                HomeStatsView(showPortfolio: $showPortfolio)
                 SearchBarView(searchText: $homeViewModel.searchText)
                 columnTitles
                 if !showPortfolio {
@@ -83,7 +83,7 @@ extension HomeView {
 
     private var allCoinsList: some View {
         List {
-            ForEach(homeViewModel.allCoins) { coin in
+            ForEach($homeViewModel.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10,
                                          leading: 0,
@@ -96,7 +96,7 @@ extension HomeView {
 
     private var portfolioCoinsList: some View {
         List {
-            ForEach(homeViewModel.portfolioCoins) { coin in
+            ForEach($homeViewModel.portfolioCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10,
                                          leading: 0,

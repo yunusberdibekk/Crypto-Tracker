@@ -12,6 +12,7 @@ final class HomeViewModel: ObservableObject {
     @Published var statistics: [StatisticModel] = []
     @Published var allCoins: [CoinModel] = []
     @Published var portfolioCoins: [CoinModel] = []
+    @Published var portfolioEntities: [PortfolioEntity] = []
     @Published var searchText: String = ""
 
     private let coinDataService = CoinDataService() // TODO: -Bunu dışarıdan alabiliriz.
@@ -42,7 +43,6 @@ final class HomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        /// Update portfolioCoins
         $allCoins
             .combineLatest(portfolioDataService.$savedEntities)
             .map { coinModels, portfolioEntities -> [CoinModel] in

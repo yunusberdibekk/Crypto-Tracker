@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CoinRowView: View {
-    let coin: CoinModel
+    @Binding var coin: CoinModel
     let showHoldingsColumn: Bool
 
     var body: some View {
@@ -25,7 +25,7 @@ struct CoinRowView: View {
 }
 
 #Preview {
-    CoinRowView(coin: CoinModel.coin, showHoldingsColumn: true)
+    CoinRowView(coin: .constant(CoinModel.coin), showHoldingsColumn: true)
 }
 
 extension CoinRowView {

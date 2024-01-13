@@ -42,20 +42,27 @@ final class PortfolioDataService {
     }
     
     // MARK: - PRIVATE
-    
+
     private func getPortfolio() {
         let request = NSFetchRequest<PortfolioEntity>(entityName: entityName)
         do {
-            savedEntities = try container.viewContext.fetch(request)
+            let entities = try container.viewContext.fetch(request)
+            DispatchQueue.main.async {
+                self.savedEntities = entities
+            }
         } catch {
             print("Error fetching portfolio entites!: \(error.localizedDescription)")
         }
     }
     
     private func add(coin: CoinModel, amount: Double) {
-        let entity = PortfolioEntity(context: container.viewContext)
-        entity.coinID = coin.id
-        entity.amount = amount
+        if let existingEntity = savedEntities.first(where: {$0.coinID == coin.id}) {
+            existingEntity.amount = amount
+        } else {
+            let entity = PortfolioEntity(context: container.viewContext)
+            entity.coinID = coin.id
+            entity.amount = amount
+        }
         applyChanges()
     }
     
@@ -66,6 +73,7 @@ final class PortfolioDataService {
     
     private func delete(entity: PortfolioEntity) {
         container.viewContext.delete(entity)
+        container.viewContext.refreshAllObjects()
         applyChanges()
     }
     

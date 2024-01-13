@@ -52,7 +52,8 @@ extension PorfolioView {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 10, content: {
                 ForEach(viewModel.searchText.isEmpty ?
-                    viewModel.allCoins : viewModel.portfolioCoins){ coin in
+                    viewModel.portfolioCoins : viewModel.allCoins)
+                { coin in
                     CoinLogoView(coin: coin)
                         .frame(width: 75)
                         .padding(4)
@@ -127,6 +128,7 @@ extension PorfolioView {
     }
 
     private func saveButtonPressed() {
+        // TODO: - UPDATE ATINCA MODELDE DEĞİŞİYOR ANCAK HOME VİEW İÇERİSİNDE PORTFOLİO LİSTESİNDE DEĞİŞMİYOR.Silme ve oluştuma işlemi oluyor. Ancak update işleminde sorun var.
         guard let coin = selectedCoin,
               let amount = Double(quantityText)
         else { return }
@@ -146,12 +148,12 @@ extension PorfolioView {
     }
 
     private func updateSelectedCoin(coin: CoinModel) {
+        // TODO: BURASI DEĞİŞTİRİNCE DİREKT UI ETKİLENMİYOR.
         selectedCoin = coin
-
         if let portfolioCoin = viewModel.portfolioCoins.first(where: { $0.id == coin.id }),
            let amount = portfolioCoin.currentHoldings
         {
-            quantityText = amount.description
+            quantityText = "\(amount)"
         } else {
             quantityText = ""
         }
