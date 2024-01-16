@@ -85,10 +85,11 @@ extension HomeView {
         List {
             ForEach($homeViewModel.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
-                    .listRowInsets(.init(top: 10,
-                                         leading: 0,
-                                         bottom: 10,
-                                         trailing: 10))
+                    .listRowInsets(
+                        .init(top: 10,
+                              leading: 0,
+                              bottom: 10,
+                              trailing: 10))
             }
         }
         .listStyle(.plain)
@@ -98,10 +99,11 @@ extension HomeView {
         List {
             ForEach($homeViewModel.portfolioCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
-                    .listRowInsets(.init(top: 10,
-                                         leading: 0,
-                                         bottom: 10,
-                                         trailing: 10))
+                    .listRowInsets(
+                        .init(top: 10,
+                              leading: 0,
+                              bottom: 10,
+                              trailing: 10))
             }
         }
         .listStyle(.plain)
@@ -109,13 +111,58 @@ extension HomeView {
 
     private var columnTitles: some View {
         HStack(content: {
-            Text("Coin")
+            HStack(spacing: 4) {
+                Text("Coin")
+                Image(systemName: "chevron.down")
+                    .opacity((homeViewModel.sortOption == .rank ||
+                            homeViewModel.sortOption == .rankReversed) ? 1.0 : 0.0)
+                    .rotationEffect(.degrees(
+                        homeViewModel.sortOption == .rank ? 0 : 180))
+            }
+            .onTapGesture {
+                withAnimation(.default) {
+                    homeViewModel.sortOption = homeViewModel.sortOption == .rank ? .rankReversed : .rank
+                }
+            }
             Spacer()
             if showPortfolio {
-                Text("Holdings")
+                HStack(spacing: 4) {
+                    Text("Holdings")
+                    Image(systemName: "chevron.down")
+                        .opacity((homeViewModel.sortOption == .holdings ||
+                                homeViewModel.sortOption == .holdingsReversed) ? 1.0 : 0.0)
+                        .rotationEffect(.degrees(
+                            homeViewModel.sortOption == .holdings ? 0 : 180))
+                }
+                .onTapGesture {
+                    withAnimation(.default) {
+                        homeViewModel.sortOption = homeViewModel.sortOption == .holdings ? .holdingsReversed : .holdings
+                    }
+                }
             }
-            Text("Price")
-                .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+            HStack(spacing: 4) {
+                Text("Price")
+                Image(systemName: "chevron.down")
+                    .opacity((homeViewModel.sortOption == .price ||
+                            homeViewModel.sortOption == .priceReversed) ? 1.0 : 0.0)
+                    .rotationEffect(.degrees(
+                        homeViewModel.sortOption == .price ? 0 : 180))
+            }
+            .onTapGesture {
+                withAnimation(.default) {
+                    homeViewModel.sortOption = homeViewModel.sortOption == .price ? .priceReversed : .price
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+            Button(action: {
+                withAnimation(.linear(duration: 2.0)) {
+                    homeViewModel.reloadData()
+                }
+            }, label: {
+                Image(systemName: "goforward")
+            })
+            .rotationEffect(.degrees(homeViewModel.isLoading ? 360 : 0), anchor: .center)
+            .sensoryFeedback(.start, trigger: homeViewModel.isLoading)
         })
         .font(.caption)
         .foregroundStyle(Color.theme.secondaryText)
