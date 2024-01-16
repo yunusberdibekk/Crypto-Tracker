@@ -11,6 +11,8 @@ struct HomeView: View {
     @EnvironmentObject var homeViewModel: HomeViewModel
     @State private var showPortfolio: Bool = false
     @State private var showPortfolioView: Bool = false
+    @State private var selectedCoin: CoinModel? = nil
+    @State private var showDetailView: Bool = false
 
     var body: some View {
         ZStack {
@@ -86,13 +88,21 @@ extension HomeView {
             ForEach($homeViewModel.allCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(
-                        .init(top: 10,
-                              leading: 0,
-                              bottom: 10,
-                              trailing: 10))
+                        .init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin.wrappedValue)
+                    }
             }
         }
         .listStyle(.plain)
+        .navigationDestination(isPresented: $showDetailView, destination: {
+            DetailLoadingView(coin: $selectedCoin)
+        })
+    }
+
+    private func segue(coin: CoinModel) {
+        selectedCoin = coin
+        showDetailView.toggle()
     }
 
     private var portfolioCoinsList: some View {
@@ -100,10 +110,7 @@ extension HomeView {
             ForEach($homeViewModel.portfolioCoins) { coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(
-                        .init(top: 10,
-                              leading: 0,
-                              bottom: 10,
-                              trailing: 10))
+                        .init(top: 10, leading: 0, bottom: 10, trailing: 10))
             }
         }
         .listStyle(.plain)

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA27F2BA2B4E015D005A3082 /* MarketDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */; };
 		AA27F2BC2B4E04DF005A3082 /* MarketDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA27F2BB2B4E04DF005A3082 /* MarketDataService.swift */; };
+		AA3FC6F72B56E871006F9002 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3FC6F62B56E871006F9002 /* DetailView.swift */; };
 		AAA8694E2B4AE8C200B3C71C /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8694D2B4AE8C200B3C71C /* SearchBarView.swift */; };
 		AAA869502B4AFCB500B3C71C /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA8694F2B4AFCB500B3C71C /* UIApplication+Extension.swift */; };
 		AAAD70A82B505C7800914416 /* PortfolioContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAAD70A62B505C7800914416 /* PortfolioContainer.xcdatamodeld */; };
@@ -43,6 +44,7 @@
 		AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataModel.swift; sourceTree = "<group>"; };
 		AA27F2BB2B4E04DF005A3082 /* MarketDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataService.swift; sourceTree = "<group>"; };
 		AA27F2BD2B4E0F11005A3082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AA3FC6F62B56E871006F9002 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		AAA8694D2B4AE8C200B3C71C /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		AAA8694F2B4AFCB500B3C71C /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		AAAD70A72B505C7800914416 /* PortfolioContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PortfolioContainer.xcdatamodel; sourceTree = "<group>"; };
@@ -85,6 +87,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3FC6F32B56E82F006F9002 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				AA3FC6F52B56E849006F9002 /* Views */,
+				AA3FC6F42B56E845006F9002 /* ViewModels */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		AA3FC6F42B56E845006F9002 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AA3FC6F52B56E849006F9002 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA3FC6F62B56E871006F9002 /* DetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		AAA8694C2B4AE8B600B3C71C /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +186,6 @@
 			children = (
 				BE486AE72B37A5E100A0BFF3 /* CoinImageView.swift */,
 				AADE19822B4EE25F0027E666 /* CoinLogoView.swift */,
-				BE486AEB2B37A9D900A0BFF3 /* CoinImageViewModel.swift */,
 			);
 			path = CoinImage;
 			sourceTree = "<group>";
@@ -226,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				BEE450032B36E8A800F177FF /* Home */,
+				AA3FC6F32B56E82F006F9002 /* Detail */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -264,6 +290,7 @@
 		BEE450062B36E8B700F177FF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				BE486AEB2B37A9D900A0BFF3 /* CoinImageViewModel.swift */,
 				BE486A982B371B2C00A0BFF3 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
@@ -384,6 +411,7 @@
 				AADE197E2B4EDCC90027E666 /* PorfolioView.swift in Sources */,
 				BEE450152B36FBFF00F177FF /* Double+Extension.swift in Sources */,
 				BEE450082B36E8C900F177FF /* HomeView.swift in Sources */,
+				AA3FC6F72B56E871006F9002 /* DetailView.swift in Sources */,
 				AAC9FEA62B4B3DEF00FCDA15 /* HomeStatsView.swift in Sources */,
 				BEE44FEE2B36E54500F177FF /* CryptoTrackerApp.swift in Sources */,
 				AA27F2BA2B4E015D005A3082 /* MarketDataModel.swift in Sources */,
