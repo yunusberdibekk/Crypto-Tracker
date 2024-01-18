@@ -21,16 +21,75 @@ struct DetailLoadingView: View {
 
 struct DetailView: View {
     @StateObject var viewModel: CoinDetailViewModel
+    private let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
+    private let spacing: CGFloat = 30
 
     init(coin: CoinModel) {
         self._viewModel = StateObject(wrappedValue: .init(coin: coin))
     }
 
     var body: some View {
-        Text("Hello")
+        ScrollView {
+            VStack(spacing: 20, content: {
+                Text("")
+                    .frame(height: 150)
+                overviewTitle
+                Divider()
+                overviewGrid
+                additionalTitle
+                Divider()
+                additionalGrid
+            })
+            .padding()
+        }
+        .navigationTitle(viewModel.coin.name)
     }
 }
 
 #Preview {
-    DetailView(coin: .coin)
+    NavigationStack {
+        DetailView(coin: .coin)
+    }
+}
+
+extension DetailView {
+    private var overviewTitle: some View {
+        Text("Overview")
+            .font(.title)
+            .bold()
+            .foregroundStyle(Color.theme.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var additionalTitle: some View {
+        Text("Additional Details")
+            .font(.title)
+            .bold()
+            .foregroundStyle(Color.theme.accent)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var overviewGrid: some View {
+        LazyVGrid(
+            columns: columns,
+            alignment: .leading,
+            spacing: spacing,
+            content: {
+                ForEach(viewModel.overviewStatistics) { stat in
+                    StatisticView(stat: stat)
+                }
+            })
+    }
+
+    private var additionalGrid: some View {
+        LazyVGrid(
+            columns: columns,
+            alignment: .leading,
+            spacing: spacing,
+            content: {
+                ForEach(viewModel.additionalStatistics) { stat in
+                    StatisticView(stat: stat)
+                }
+            })
+    }
 }

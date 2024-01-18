@@ -287,10 +287,10 @@
 		BEE450052B36E8B400F177FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AAAD70A62B505C7800914416 /* PortfolioContainer.xcdatamodeld */,
 				BEE450102B36EF7600F177FF /* CoinModel.swift */,
 				AAC9FEA02B4B39D600FCDA15 /* StatisticModel.swift */,
 				AA27F2B92B4E015D005A3082 /* MarketDataModel.swift */,
-				AAAD70A62B505C7800914416 /* PortfolioContainer.xcdatamodeld */,
 				AA7DBB152B596F46002BE205 /* CoinDetailModel.swift */,
 			);
 			path = Models;
