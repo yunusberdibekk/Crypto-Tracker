@@ -11,7 +11,6 @@ import SwiftUI
 
 final class CoinImageService {
     @Published var image: UIImage? = nil
-
     private var imageSubscription: AnyCancellable?
     private let fileManager: LocalFileManager
     private let coin: CoinModel

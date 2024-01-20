@@ -10,7 +10,6 @@ import Foundation
 
 final class CoinDetailDataService {
     @Published var coinDetails: CoinDetailModel? = nil
-
     var coinDetailSubscription: AnyCancellable?
     let coin: CoinModel
 

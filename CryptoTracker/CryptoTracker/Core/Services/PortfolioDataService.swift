@@ -8,14 +8,12 @@
 import CoreData
 import Foundation
 
-// TODO: - BURADA YAPILAN PORTFOLİODATASERVİCE'i generic yapabilir miyiz.?
 final class PortfolioDataService {
+    @Published var savedEntities: [PortfolioEntity] = []
     private let container: NSPersistentContainer
     private let containerName: String = "PortfolioContainer"
     private let entityName: String = "PortfolioEntity"
-    
-    @Published var savedEntities: [PortfolioEntity] = []
-    
+
     init() {
         self.container = NSPersistentContainer(name: containerName)
         container.loadPersistentStores { _, error in
@@ -26,17 +24,14 @@ final class PortfolioDataService {
         }
     }
     
-    // MARK: - PUBLIC
-
     func updatePortfolio(coin: CoinModel, amount: Double) {
-        // Check if coin already in portfolio
         if let entity = savedEntities.first(where: { $0.coinID == coin.id }) {
-            if amount > 0 { // Update
+            if amount > 0 {
                 update(entity: entity, amount: amount)
-            } else { // Delete
+            } else {
                 delete(entity: entity)
             }
-        } else { // New entity
+        } else {
             add(coin: coin, amount: amount)
         }
     }
@@ -56,7 +51,7 @@ final class PortfolioDataService {
     }
     
     private func add(coin: CoinModel, amount: Double) {
-        if let existingEntity = savedEntities.first(where: {$0.coinID == coin.id}) {
+        if let existingEntity = savedEntities.first(where: { $0.coinID == coin.id }) {
             existingEntity.amount = amount
         } else {
             let entity = PortfolioEntity(context: container.viewContext)
