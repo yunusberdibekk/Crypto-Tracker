@@ -25,9 +25,8 @@ enum NetworkingManager {
 
     static func download(url: URL) -> AnyPublisher<Data, Error> {
         return URLSession.shared.dataTaskPublisher(for: url)
-            .subscribe(on: DispatchQueue.global(qos: .default))
             .tryMap { try handleURLResponse(output: $0, url: url) }
-            .receive(on: DispatchQueue.main)
+            .retry(3) // Eğer handleUrlResponse kısmında hata olursa burası 3 defaya kadar bu isteği tekrardan atacak.!
             .eraseToAnyPublisher()
     }
 

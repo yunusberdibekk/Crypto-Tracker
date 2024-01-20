@@ -15,12 +15,20 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                viewAppCodeSection
-                coinGeckoSection
-                developerSection
-                applicationSection
-            }
+            ZStack(content: {
+                Color.theme.background.ignoresSafeArea()
+                List {
+                    viewAppCodeSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                    coinGeckoSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                    developerSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                    applicationSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                }
+            })
+
             .font(.headline)
             .tint(.blue)
             .listStyle(.grouped)
