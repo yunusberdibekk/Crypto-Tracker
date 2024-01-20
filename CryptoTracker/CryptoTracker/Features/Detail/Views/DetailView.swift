@@ -20,6 +20,7 @@ struct DetailLoadingView: View {
 }
 
 struct DetailView: View {
+    @State private var showFullDescription: Bool = false
     @StateObject var viewModel: CoinDetailViewModel
     private let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
     private let spacing: CGFloat = 30
@@ -36,10 +37,12 @@ struct DetailView: View {
                 VStack(spacing: 20, content: {
                     overviewTitle
                     Divider()
+                    descriptionSection
                     overviewGrid
                     additionalTitle
                     Divider()
                     additionalGrid
+                    websiteSection
                 })
                 .padding()
             })
@@ -108,5 +111,49 @@ extension DetailView {
             CoinImageView(coin: viewModel.coin)
                 .frame(width: 25, height: 25)
         })
+    }
+
+    private var descriptionSection: some View {
+        ZStack(content: {
+            if let coinDescription = viewModel.coinDescription, !coinDescription.isEmpty {
+                VStack(alignment: .leading, content: {
+                    Text(coinDescription)
+                        .font(.callout)
+                        .foregroundStyle(Color.theme.secondaryText)
+                        .lineLimit(showFullDescription ? .max : 3)
+                    Button(action: {
+                        withAnimation(.easeInOut) {
+                            showFullDescription.toggle()
+                        }
+                    }, label: {
+                        Text(showFullDescription ? "Less" : "Read more...")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .padding(.vertical, 4)
+                    })
+                    .tint(.blue)
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        })
+    }
+
+    private var websiteSection: some View {
+        VStack(alignment: .leading, spacing: 20, content: {
+            if let websiteString = viewModel.websiteURL,
+               let url = URL(string: websiteString)
+            {
+                Link("Website", destination: url)
+            }
+
+            if let redditString = viewModel.redditURL,
+               let url = URL(string: redditString)
+            {
+                Link("Reddit", destination: url)
+            }
+        })
+        .tint(.blue)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .font(.headline)
     }
 }
