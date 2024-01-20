@@ -29,20 +29,27 @@ struct DetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20, content: {
-                Text("")
-                    .frame(height: 150)
-                overviewTitle
-                Divider()
-                overviewGrid
-                additionalTitle
-                Divider()
-                additionalGrid
+        ScrollView(showsIndicators: false) {
+            VStack(content: {
+                ChartView(coin: viewModel.coin)
+                    .padding(.vertical)
+                VStack(spacing: 20, content: {
+                    overviewTitle
+                    Divider()
+                    overviewGrid
+                    additionalTitle
+                    Divider()
+                    additionalGrid
+                })
+                .padding()
             })
-            .padding()
         }
         .navigationTitle(viewModel.coin.name)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                navigationBarTrailingItems
+            }
+        })
     }
 }
 
@@ -91,5 +98,15 @@ extension DetailView {
                     StatisticView(stat: stat)
                 }
             })
+    }
+
+    private var navigationBarTrailingItems: some View {
+        HStack(content: {
+            Text(viewModel.coin.symbol.uppercased())
+                .font(.headline)
+                .foregroundStyle(Color.theme.secondaryText)
+            CoinImageView(coin: viewModel.coin)
+                .frame(width: 25, height: 25)
+        })
     }
 }
