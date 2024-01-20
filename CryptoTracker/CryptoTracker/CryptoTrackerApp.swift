@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct CryptoTrackerApp: App {
     @StateObject private var homeViewModel = HomeViewModel()
+    @State private var showLauchView: Bool = true
 
     init() {
         // Navigation title foreground color değiştirme.
@@ -19,11 +20,20 @@ struct CryptoTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                HomeView()
-                    .toolbar(.hidden, for: .automatic)
-            }
-            .environmentObject(homeViewModel)
+            ZStack(content: {
+                NavigationStack {
+                    HomeView()
+                        .toolbar(.hidden, for: .automatic)
+                }
+                .environmentObject(homeViewModel)
+                ZStack(content: {
+                    if showLauchView {
+                        LaunchView(showLaunchView: $showLauchView)
+                            .transition(.move(edge: .leading))
+                    }
+                })
+                .zIndex(2.0)
+            })
         }
     }
 }
