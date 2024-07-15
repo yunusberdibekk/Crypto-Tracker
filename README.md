@@ -1,5 +1,7 @@
 # Crypto-App
 
+This application was developed to simplify the cryptocurrency tracking and management experience. Users can access up-to-date cryptocurrency information through the CoinGecko API and track the coins they are interested in by adding them to their wallet. Designed with SwiftUI, this app is characterized by its user-friendly interface and high performance.
+
 ## Built With
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/)
 - [API](https://www.coingecko.com/en/api)
